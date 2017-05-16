@@ -1,0 +1,19 @@
+---
+- hosts: all
+  remote_user: vagrant 
+  become: yes 
+  become_method: sudo
+  connection: ssh
+  gather_facts: no
+  tasks:
+  - name: Install httpd and running
+    yum: 
+      name: httpd
+      state: latest
+    notify:  
+    - start service
+  handlers:
+  - name: start service 
+    service: 
+      name: httpd
+      state: restarted 

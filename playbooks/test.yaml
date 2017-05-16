@@ -1,0 +1,17 @@
+---
+- hosts: '{{ myhosts }}'
+  remote_user: vagrant
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: '{{gather}}'
+  vars: 
+    myhosts: websv:dbv
+    gather: yes
+    pkg: tree
+  tasks:
+  - name: Install the indicated software
+    yum:
+      name: '{{ pkg }}'
+      state: latest
+   
